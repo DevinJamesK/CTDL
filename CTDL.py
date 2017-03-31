@@ -6,14 +6,20 @@ import requests
 import json
 
 def main():
+    totalSampleCount = 0
     sampleData = init()
+
+    for sample in sampleData:
+        totalSampleCount += 1
+
+    print("Total number of samples: {0}".format(totalSampleCount))
 
 def init():
     # Creating our sample folder where our downloads will be stored
     if not os.path.exists('./samples'):
-        print ("Creating sample directory if one doesn't exist: ", end='')
+        print("Creating sample directory if one doesn't exist: ", end='')
         os.makedirs('./samples')
-        print ("DONE")
+        print("DONE")
 
     # Pulling most current json sample data from below URL
     print ("Updating sample data to most current: ", end='')
@@ -22,7 +28,7 @@ def init():
         print("FAILED, Server Returned {0}".format(r.status_code))
         exit()
     print("DONE")
-    return r.json();
+    return r.json()
 
 if __name__ == '__main__':
     main()
